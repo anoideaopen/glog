@@ -172,7 +172,8 @@ func (w *depthLoggerWrapper) Fatal(args ...interface{}) {
 			os.Exit(1)
 		}
 	}()
-	w.l.Panic(args...)
+	w.l.Error(args...)
+	panic(nil)
 }
 
 // Fatalln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
@@ -192,7 +193,8 @@ func (w *depthLoggerWrapper) Fatalf(format string, args ...interface{}) {
 			os.Exit(1)
 		}
 	}()
-	w.l.Panicf(format, args...)
+	w.l.Errorf(format, args...)
+	panic(nil)
 }
 
 // V reports whether verbosity level l is at least the requested verbose level.

@@ -39,19 +39,4 @@ func TestLogger(t *testing.T) {
 	lr.SetLevel(logrus.InfoLevel)
 	l.Debug("1", "2", "3")
 	l.Debugf("%s,%s", "1", "2")
-
-	defer func() {
-		_ = recover()
-
-		l.Trace("1", "2", "3")
-		l.Tracef("%s,%s", "1", "2")
-	}()
-
-	defer func() {
-		_ = recover()
-
-		l.Panicf("%s,%s", "1", "2")
-	}()
-
-	l.Panic("1", "2", "3")
 }

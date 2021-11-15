@@ -97,13 +97,3 @@ func (l *Log) Error(args ...interface{}) {
 func (l *Log) Errorf(format string, args ...interface{}) {
 	l.e.Logf(logrus.ErrorLevel, format, args...)
 }
-
-// Panic prints a log message with "panic" log level. Then calls panic().
-func (l *Log) Panic(args ...interface{}) {
-	l.e.Log(logrus.PanicLevel, args...)
-}
-
-// Panicf prints a log message with "error" log level and specified format. Then calls panic().
-func (l *Log) Panicf(format string, args ...interface{}) {
-	l.e.Logf(logrus.PanicLevel, format, args...)
-}

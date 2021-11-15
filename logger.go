@@ -37,9 +37,4 @@ type Logger interface {
 	Error(args ...interface{})
 	// Errorf prints a log message with "error" log level and specified format.
 	Errorf(format string, args ...interface{})
-
-	// Panic prints a log message with "panic" log level. Then calls panic().
-	Panic(args ...interface{})
-	// Panicf prints a log message with "error" log level and specified format. Then calls panic().
-	Panicf(format string, args ...interface{})
 }

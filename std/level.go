@@ -18,8 +18,7 @@ func (l Level) String() string {
 
 // Log levels.
 const (
-	LevelPanic Level = iota
-	LevelError
+	LevelError Level = iota
 	LevelWarning
 	LevelInfo
 	LevelDebug

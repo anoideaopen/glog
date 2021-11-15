@@ -116,18 +116,6 @@ func (l *Log) Errorf(format string, args ...interface{}) {
 	l.Printf(LevelError, format, args...)
 }
 
-// Panic prints a log message with "panic" log level. Then calls panic().
-func (l *Log) Panic(args ...interface{}) {
-	l.Print(LevelPanic, args...)
-	panic(fmt.Sprint(append([]interface{}{"[" + LevelPanic.String() + "]"}, args...)...))
-}
-
-// Panicf prints a log message with "error" log level and specified format. Then calls panic().
-func (l *Log) Panicf(format string, args ...interface{}) {
-	l.Printf(LevelPanic, format, args...)
-	panic(fmt.Sprintf("["+LevelPanic.String()+"] "+format, args...))
-}
-
 func (l *Log) updateFields(fields ...glog.Field) glog.Logger {
 	if l.fields == nil {
 		l.fields = make(map[string]interface{})
