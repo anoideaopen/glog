@@ -4,7 +4,7 @@ package std
 type Level int
 
 var levels = []string{
-	"PANI", "ERRO", "WARN", "INFO", "DEBU", "TRAC",
+	"ERRO", "WARN", "INFO", "DEBU", "TRAC",
 }
 
 // String implements Stringer interface.
