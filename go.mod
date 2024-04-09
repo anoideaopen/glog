@@ -1,4 +1,4 @@
-module github.com/newity/glog
+module github.com/anoideaopen/glog
 
 go 1.14
 
