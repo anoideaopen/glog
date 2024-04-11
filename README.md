@@ -1,5 +1,8 @@
 # Glog
 
+[![Go Verify Build](https://github.com/anoideaopen/glog/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/anoideaopen/glog/actions/workflows/go.yml)
+[![Security vulnerability scan](https://github.com/anoideaopen/glog/actions/workflows/vulnerability-scan.yml/badge.svg?branch=main)](https://github.com/anoideaopen/glog/actions/workflows/vulnerability-scan.yml)
+
 __glog__ is an abstraction for various Go language log libraries.
 
 The ```Logger``` interface is in maintenance-mode to prevent broken changes to projects based on it. But we will add more different implementations (wrappers) for various log libraries. 
