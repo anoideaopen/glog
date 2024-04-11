@@ -3,8 +3,8 @@ package logr_test
 import (
 	"testing"
 
-	"github.com/newity/glog"
-	"github.com/newity/glog/logr"
+	"github.com/anoideaopen/glog"
+	"github.com/anoideaopen/glog/logr"
 	"github.com/sirupsen/logrus"
 )
 

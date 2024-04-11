@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/newity/glog"
+	"github.com/anoideaopen/glog"
 )
 
 // Log implements the Logger interface by using standard golang logger.
