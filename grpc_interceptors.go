@@ -20,7 +20,8 @@ func UnaryServerInterceptor(l Logger) grpc.UnaryServerInterceptor {
 		ctx context.Context,
 		req interface{},
 		info *grpc.UnaryServerInfo,
-		handler grpc.UnaryHandler) (resp interface{}, err error) {
+		handler grpc.UnaryHandler,
+	) (resp interface{}, err error) {
 		var (
 			logger = l.With()
 			logCtx = NewContext(ctx, logger)
@@ -60,7 +61,8 @@ func StreamServerInterceptor(l Logger) grpc.StreamServerInterceptor {
 		srv interface{},
 		stream grpc.ServerStream,
 		info *grpc.StreamServerInfo,
-		handler grpc.StreamHandler) (err error) {
+		handler grpc.StreamHandler,
+	) (err error) {
 		var (
 			logger = l.With()
 			logCtx = NewContext(stream.Context(), logger)

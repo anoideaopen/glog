@@ -4,8 +4,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/newity/glog"
-	"github.com/newity/glog/std"
+	"github.com/anoideaopen/glog"
+	"github.com/anoideaopen/glog/std"
 )
 
 func TestLogger(t *testing.T) {

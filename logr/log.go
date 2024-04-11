@@ -1,7 +1,7 @@
 package logr
 
 import (
-	"github.com/newity/glog"
+	"github.com/anoideaopen/glog"
 	"github.com/sirupsen/logrus"
 )
 

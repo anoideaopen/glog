@@ -1,15 +1,17 @@
 module github.com/anoideaopen/glog
 
-go 1.14
+go 1.18
 
 require (
 	github.com/sirupsen/logrus v1.8.1
-	google.golang.org/grpc v1.42.0
+	google.golang.org/grpc v1.57.0
 )
 
 require (
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
-	golang.org/x/sys v0.0.0-20211113001501-0c823b97ae02 // indirect
-	golang.org/x/text v0.3.7 // indirect
-	google.golang.org/genproto v0.0.0-20211115160612-a5da7257a6f7 // indirect
+	github.com/golang/protobuf v1.5.3 // indirect
+	golang.org/x/net v0.19.0 // indirect
+	golang.org/x/sys v0.17.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230525234030-28d5490b6b19 // indirect
+	google.golang.org/protobuf v1.32.0 // indirect
 )
