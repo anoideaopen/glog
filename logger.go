@@ -7,7 +7,7 @@ type Field struct {
 }
 
 // Logger interface is responsible for various logging systems.
-type Logger interface {
+type Logger interface { //nolint:interfacebloat
 	// Set updates logger's additional fields.
 	Set(fields ...Field)
 	// With returns a copy of the logger with additional fields.
