@@ -1,6 +1,6 @@
 run:
   # The default concurrency value is the number of available CPU.
-  go: '1.22'
+  go: '1.23'
   concurrency: 4
   timeout: 5m
   tests: false
@@ -17,7 +17,7 @@ linters:
     - bodyclose
     - dogsled
     - errorlint
-    - exportloopref
+    - copyloopvar
     - misspell
     - nestif
     - noctx
@@ -53,6 +53,7 @@ linters:
     - durationcheck
     - nilerr
     - forcetypeassert
+    - interfacebloat
     - contextcheck
     - loggercheck
     - reassign
@@ -64,28 +65,23 @@ linters:
     - sloglint
     - protogetter
     - fatcontext
-    - spancheck
-    - intrange
-    - copyloopvar
+    - recvcheck
+    - iface
+#    - spancheck
+#    - intrange # (Go 1.22+)
+#    - copyloopvar # (Go 1.22+)
   disable:
     - godot
     - wsl
     - lll
-    - maligned
     - paralleltest
     - godox
     - testpackage
     - nlreturn
-    - scopelint
-    - golint
-    - interfacer
     - rowserrcheck
     - sqlclosecheck
     - ireturn
     - wastedassign
-    - deadcode
-    - structcheck
-    - varcheck
     - depguard
     - tagliatelle
     - gosmopolitan
@@ -94,15 +90,13 @@ linters:
     - zerologlint
     - dupl
     - funlen
-    - gomnd
-    - execinquery
-    - interfacebloat
 linters-settings:
   gosec:
     excludes:
       - 'G107'
       - 'G402'
       - 'G404'
+      - 'G115'
   revive:
     ignore-generated-header: true
     rules:
