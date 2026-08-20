@@ -1,6 +1,8 @@
 package logr
 
 import (
+	"maps"
+
 	"github.com/anoideaopen/glog"
 	"github.com/sirupsen/logrus"
 )
@@ -34,9 +36,7 @@ func (l *Log) Set(fields ...glog.Field) {
 func (l *Log) With(fields ...glog.Field) glog.Logger {
 	f := make(logrus.Fields)
 
-	for k, v := range l.e.Data {
-		f[k] = v
-	}
+	maps.Copy(f, l.e.Data)
 
 	for _, field := range fields {
 		f[field.K] = field.V
@@ -49,51 +49,51 @@ func (l *Log) With(fields ...glog.Field) glog.Logger {
 }
 
 // Trace prints a log message with "trace" log level.
-func (l *Log) Trace(args ...interface{}) {
+func (l *Log) Trace(args ...any) {
 	l.e.Log(logrus.TraceLevel, args...)
 }
 
 // Tracef prints a log message with "trace" log level and specified format.
-func (l *Log) Tracef(format string, args ...interface{}) {
+func (l *Log) Tracef(format string, args ...any) {
 	l.e.Logf(logrus.TraceLevel, format, args...)
 }
 
 // Debug prints a log message with "debug" log level.
-func (l *Log) Debug(args ...interface{}) {
+func (l *Log) Debug(args ...any) {
 	l.e.Log(logrus.DebugLevel, args...)
 }
 
 // Debugf prints a log message with "debug" log level and specified format.
-func (l *Log) Debugf(format string, args ...interface{}) {
+func (l *Log) Debugf(format string, args ...any) {
 	l.e.Logf(logrus.DebugLevel, format, args...)
 }
 
 // Info prints a log message with "info" log level.
-func (l *Log) Info(args ...interface{}) {
+func (l *Log) Info(args ...any) {
 	l.e.Log(logrus.InfoLevel, args...)
 }
 
 // Infof prints a log message with "info" log level and specified format.
-func (l *Log) Infof(format string, args ...interface{}) {
+func (l *Log) Infof(format string, args ...any) {
 	l.e.Logf(logrus.InfoLevel, format, args...)
 }
 
 // Warning prints a log message with "warning" log level.
-func (l *Log) Warning(args ...interface{}) {
+func (l *Log) Warning(args ...any) {
 	l.e.Log(logrus.WarnLevel, args...)
 }
 
 // Warningf prints a log message with "warning" log level and specified format.
-func (l *Log) Warningf(format string, args ...interface{}) {
+func (l *Log) Warningf(format string, args ...any) {
 	l.e.Logf(logrus.WarnLevel, format, args...)
 }
 
 // Error prints a log message with "error" log level.
-func (l *Log) Error(args ...interface{}) {
+func (l *Log) Error(args ...any) {
 	l.e.Log(logrus.ErrorLevel, args...)
 }
 
 // Errorf prints a log message with "error" log level and specified format.
-func (l *Log) Errorf(format string, args ...interface{}) {
+func (l *Log) Errorf(format string, args ...any) {
 	l.e.Logf(logrus.ErrorLevel, format, args...)
 }
