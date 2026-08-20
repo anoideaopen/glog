@@ -3,6 +3,7 @@ package std
 import (
 	"fmt"
 	"log"
+	"maps"
 	"strings"
 
 	"github.com/anoideaopen/glog"
@@ -12,7 +13,7 @@ import (
 type Log struct {
 	lvl    Level
 	l      *log.Logger
-	fields map[string]interface{}
+	fields map[string]any
 	fdata  string
 }
 
@@ -39,26 +40,24 @@ func (l *Log) Set(fields ...glog.Field) {
 // With returns a copy of the logger with additional fields.
 func (l *Log) With(fields ...glog.Field) glog.Logger {
 	lcopy := New(l.l, l.lvl)
-	lcopy.fields = make(map[string]interface{})
+	lcopy.fields = make(map[string]any)
 
-	for k, v := range l.fields {
-		lcopy.fields[k] = v
-	}
+	maps.Copy(lcopy.fields, l.fields)
 
 	return lcopy.updateFields(fields...)
 }
 
 // Print prints log message with a specified level.
-func (l *Log) Print(lvl Level, args ...interface{}) {
+func (l *Log) Print(lvl Level, args ...any) {
 	if l.lvl < lvl {
 		return
 	}
 
-	l.l.Print(append([]interface{}{"[" + lvl.String() + "]" + l.fdata}, args...)...)
+	l.l.Print(append([]any{"[" + lvl.String() + "]" + l.fdata}, args...)...)
 }
 
 // Printf prints log message with a specified level and format.
-func (l *Log) Printf(lvl Level, format string, args ...interface{}) {
+func (l *Log) Printf(lvl Level, format string, args ...any) {
 	if l.lvl < lvl {
 		return
 	}
@@ -67,58 +66,58 @@ func (l *Log) Printf(lvl Level, format string, args ...interface{}) {
 }
 
 // Trace prints a log message with "trace" log level.
-func (l *Log) Trace(args ...interface{}) {
+func (l *Log) Trace(args ...any) {
 	l.Print(LevelTrace, args...)
 }
 
 // Tracef prints a log message with "trace" log level and specified format.
-func (l *Log) Tracef(format string, args ...interface{}) {
+func (l *Log) Tracef(format string, args ...any) {
 	l.Printf(LevelTrace, format, args...)
 }
 
 // Debug prints a log message with "debug" log level.
-func (l *Log) Debug(args ...interface{}) {
+func (l *Log) Debug(args ...any) {
 	l.Print(LevelDebug, args...)
 }
 
 // Debugf prints a log message with "debug" log level and specified format.
-func (l *Log) Debugf(format string, args ...interface{}) {
+func (l *Log) Debugf(format string, args ...any) {
 	l.Printf(LevelDebug, format, args...)
 }
 
 // Info prints a log message with "info" log level.
-func (l *Log) Info(args ...interface{}) {
+func (l *Log) Info(args ...any) {
 	l.Print(LevelInfo, args...)
 }
 
 // Infof prints a log message with "info" log level and specified format.
-func (l *Log) Infof(format string, args ...interface{}) {
+func (l *Log) Infof(format string, args ...any) {
 	l.Printf(LevelInfo, format, args...)
 }
 
 // Warning prints a log message with "warning" log level.
-func (l *Log) Warning(args ...interface{}) {
+func (l *Log) Warning(args ...any) {
 	l.Print(LevelWarning, args...)
 }
 
 // Warningf prints a log message with "warning" log level and specified format.
-func (l *Log) Warningf(format string, args ...interface{}) {
+func (l *Log) Warningf(format string, args ...any) {
 	l.Printf(LevelWarning, format, args...)
 }
 
 // Error prints a log message with "error" log level.
-func (l *Log) Error(args ...interface{}) {
+func (l *Log) Error(args ...any) {
 	l.Print(LevelError, args...)
 }
 
 // Errorf prints a log message with "error" log level and specified format.
-func (l *Log) Errorf(format string, args ...interface{}) {
+func (l *Log) Errorf(format string, args ...any) {
 	l.Printf(LevelError, format, args...)
 }
 
 func (l *Log) updateFields(fields ...glog.Field) glog.Logger {
 	if l.fields == nil {
-		l.fields = make(map[string]interface{})
+		l.fields = make(map[string]any)
 	}
 
 	for _, field := range fields {
@@ -127,7 +126,7 @@ func (l *Log) updateFields(fields ...glog.Field) glog.Logger {
 
 	sb := strings.Builder{}
 	for k, v := range l.fields {
-		sb.WriteString(fmt.Sprintf("%s:%v ", k, v))
+		fmt.Fprintf(&sb, "%s:%v ", k, v)
 	}
 
 	out := sb.String()

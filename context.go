@@ -29,15 +29,15 @@ var silentLogger = new(Silent)
 // Silent implements the Logger interface without any output.
 type Silent struct{}
 
-func (*Silent) Set(_ ...Field)                      {}
-func (*Silent) With(_ ...Field) Logger              { return new(Silent) }
-func (*Silent) Trace(_ ...interface{})              {}
-func (*Silent) Tracef(_ string, _ ...interface{})   {}
-func (*Silent) Debug(_ ...interface{})              {}
-func (*Silent) Debugf(_ string, _ ...interface{})   {}
-func (*Silent) Info(_ ...interface{})               {}
-func (*Silent) Infof(_ string, _ ...interface{})    {}
-func (*Silent) Warning(_ ...interface{})            {}
-func (*Silent) Warningf(_ string, _ ...interface{}) {}
-func (*Silent) Error(_ ...interface{})              {}
-func (*Silent) Errorf(_ string, _ ...interface{})   {}
+func (*Silent) Set(_ ...Field)              {}
+func (*Silent) With(_ ...Field) Logger      { return new(Silent) }
+func (*Silent) Trace(_ ...any)              {}
+func (*Silent) Tracef(_ string, _ ...any)   {}
+func (*Silent) Debug(_ ...any)              {}
+func (*Silent) Debugf(_ string, _ ...any)   {}
+func (*Silent) Info(_ ...any)               {}
+func (*Silent) Infof(_ string, _ ...any)    {}
+func (*Silent) Warning(_ ...any)            {}
+func (*Silent) Warningf(_ string, _ ...any) {}
+func (*Silent) Error(_ ...any)              {}
+func (*Silent) Errorf(_ string, _ ...any)   {}

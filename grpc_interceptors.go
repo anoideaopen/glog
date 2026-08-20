@@ -18,10 +18,10 @@ const timeDivider = 1000
 func UnaryServerInterceptor(l Logger) grpc.UnaryServerInterceptor {
 	return func(
 		ctx context.Context,
-		req interface{},
+		req any,
 		info *grpc.UnaryServerInfo,
 		handler grpc.UnaryHandler,
-	) (resp interface{}, err error) {
+	) (resp any, err error) {
 		var (
 			logger = l.With()
 			logCtx = NewContext(ctx, logger)
@@ -58,7 +58,7 @@ func UnaryServerInterceptor(l Logger) grpc.UnaryServerInterceptor {
 // StreamServerInterceptor returns a new streaming server interceptor that adds Logger to the context.
 func StreamServerInterceptor(l Logger) grpc.StreamServerInterceptor {
 	return func(
-		srv interface{},
+		srv any,
 		stream grpc.ServerStream,
 		info *grpc.StreamServerInfo,
 		handler grpc.StreamHandler,
@@ -120,54 +120,54 @@ type depthLoggerWrapper struct {
 }
 
 // Info logs to INFO log. Arguments are handled in the manner of fmt.Print.
-func (w *depthLoggerWrapper) Info(args ...interface{}) {
+func (w *depthLoggerWrapper) Info(args ...any) {
 	w.l.Info(args...)
 }
 
 // Infoln logs to INFO log. Arguments are handled in the manner of fmt.Println.
-func (w *depthLoggerWrapper) Infoln(args ...interface{}) {
+func (w *depthLoggerWrapper) Infoln(args ...any) {
 	w.Info(args...)
 }
 
 // Infof logs to INFO log. Arguments are handled in the manner of fmt.Printf.
-func (w *depthLoggerWrapper) Infof(format string, args ...interface{}) {
+func (w *depthLoggerWrapper) Infof(format string, args ...any) {
 	w.l.Infof(format, args...)
 }
 
 // Warning logs to WARNING log. Arguments are handled in the manner of fmt.Print.
-func (w *depthLoggerWrapper) Warning(args ...interface{}) {
+func (w *depthLoggerWrapper) Warning(args ...any) {
 	w.l.Warning(args...)
 }
 
 // Warningln logs to WARNING log. Arguments are handled in the manner of fmt.Println.
-func (w *depthLoggerWrapper) Warningln(args ...interface{}) {
+func (w *depthLoggerWrapper) Warningln(args ...any) {
 	w.Warning(args...)
 }
 
 // Warningf logs to WARNING log. Arguments are handled in the manner of fmt.Printf.
-func (w *depthLoggerWrapper) Warningf(format string, args ...interface{}) {
+func (w *depthLoggerWrapper) Warningf(format string, args ...any) {
 	w.l.Warningf(format, args...)
 }
 
 // Error logs to ERROR log. Arguments are handled in the manner of fmt.Print.
-func (w *depthLoggerWrapper) Error(args ...interface{}) {
+func (w *depthLoggerWrapper) Error(args ...any) {
 	w.l.Error(args...)
 }
 
 // Errorln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
-func (w *depthLoggerWrapper) Errorln(args ...interface{}) {
+func (w *depthLoggerWrapper) Errorln(args ...any) {
 	w.Error(args...)
 }
 
 // Errorf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
-func (w *depthLoggerWrapper) Errorf(format string, args ...interface{}) {
+func (w *depthLoggerWrapper) Errorf(format string, args ...any) {
 	w.l.Errorf(format, args...)
 }
 
 // Fatal logs to ERROR log. Arguments are handled in the manner of fmt.Print.
 // gRPC ensures that all Fatal logs will exit with os.Exit(1).
 // Implementations may also call os.Exit() with a non-zero exit code.
-func (w *depthLoggerWrapper) Fatal(args ...interface{}) {
+func (w *depthLoggerWrapper) Fatal(args ...any) {
 	defer func() {
 		if r := recover(); r != nil {
 			w.l.Error(r)
@@ -181,14 +181,14 @@ func (w *depthLoggerWrapper) Fatal(args ...interface{}) {
 // Fatalln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
 // gRPC ensures that all Fatal logs will exit with os.Exit(1).
 // Implementations may also call os.Exit() with a non-zero exit code.
-func (w *depthLoggerWrapper) Fatalln(args ...interface{}) {
+func (w *depthLoggerWrapper) Fatalln(args ...any) {
 	w.Fatal(args...)
 }
 
 // Fatalf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
 // gRPC ensures that all Fatal logs will exit with os.Exit(1).
 // Implementations may also call os.Exit() with a non-zero exit code.
-func (w *depthLoggerWrapper) Fatalf(format string, args ...interface{}) {
+func (w *depthLoggerWrapper) Fatalf(format string, args ...any) {
 	defer func() {
 		if r := recover(); r != nil {
 			w.l.Error(r)
@@ -223,7 +223,7 @@ func addStdFields(ctx context.Context, logger Logger, fullMethodString string, s
 	}
 }
 
-func levelLogf(logger Logger, code codes.Code, format string, args ...interface{}) {
+func levelLogf(logger Logger, code codes.Code, format string, args ...any) {
 	switch code {
 	case
 		codes.OK,
