@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/sirupsen/logrus v1.10.1
-	google.golang.org/grpc v1.83.1
+	google.golang.org/grpc v1.83.2
 )
 
 require (
